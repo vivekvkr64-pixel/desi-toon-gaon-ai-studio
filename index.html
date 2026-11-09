@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111827">
+<title>Desi Toon Gaon — AI YouTube Studio</title>
+<style>
+:root{--bg:#0b1020;--panel:#121a2d;--panel2:#172238;--line:#26334d;--text:#edf2fb;--muted:#9aa8bf;--accent:#f4a340;--accent2:#ffd08a;--green:#65c99a;--red:#ff7777;--blue:#7cb7ff;--radius:16px}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(900px 500px at 85% -10%,#263451 0%,transparent 60%),var(--bg);color:var(--text);font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
+.sidebar{background:#0d1425;border-right:1px solid var(--line);padding:22px 14px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{display:flex;gap:11px;align-items:center;padding:5px 9px 22px}.logo{width:40px;height:40px;border-radius:13px;background:linear-gradient(135deg,#ffbd69,#e87935);display:grid;place-items:center;color:#211408;font-weight:900;font-size:19px}.brand b{display:block;font-size:14px}.brand small{color:var(--muted)}
+.nav-label{color:#71819d;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:16px 11px 7px}.nav button{width:100%;border:0;background:transparent;color:#aebbd0;text-align:left;padding:11px 12px;border-radius:11px;margin:2px 0;display:flex;gap:12px;align-items:center}.nav button:hover,.nav button.active{background:#202d45;color:#fff}.nav button.active{box-shadow:inset 3px 0 var(--accent)}.nav .ico{width:18px;text-align:center;color:var(--accent)}
+.side-foot{border-top:1px solid var(--line);margin-top:24px;padding:16px 10px;color:var(--muted);font-size:11px}
+main{min-width:0;padding:25px clamp(16px,3vw,38px) 50px;max-width:1600px;width:100%;margin:auto}.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px}.eyebrow{color:var(--accent);font-size:11px;text-transform:uppercase;letter-spacing:1.5px;font-weight:800}.topbar h1{font-size:clamp(22px,3vw,30px);margin:3px 0}.top-actions{display:flex;gap:9px;align-items:center}.pill,.status{border:1px solid var(--line);border-radius:999px;padding:7px 11px;color:var(--muted);font-size:11px;background:#111a2c}.status:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:7px}.btn{border:1px solid var(--line);background:#1a2740;color:var(--text);border-radius:10px;padding:9px 13px}.btn.primary{background:var(--accent);border-color:var(--accent);color:#211408;font-weight:800}.btn.small{padding:6px 9px;font-size:12px}.btn:hover{filter:brightness(1.1)}
+.page{display:none}.page.active{display:block}.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;margin:24px 0 13px}.section-head h2{font-size:18px;margin:0}.section-head p{margin:3px 0 0;color:var(--muted);font-size:12px}
+.grid{display:grid;gap:14px}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.card{background:linear-gradient(145deg,#151f34,#111a2b);border:1px solid var(--line);border-radius:var(--radius);padding:17px;min-width:0}.card h3{font-size:14px;margin:0 0 10px}.muted{color:var(--muted)}.tiny{font-size:11px;color:var(--muted)}.metric{font-size:25px;font-weight:800;letter-spacing:-.7px;margin:8px 0 3px}.metric-label{font-size:12px;color:var(--muted)}.empty{border:1px dashed #40506d;border-radius:12px;padding:22px;text-align:center;color:var(--muted);background:#111a2a}.empty strong{display:block;color:#d8e1f0;margin-bottom:5px}.notice{border:1px solid #6b512d;background:#302719;color:#f5d6a8;border-radius:12px;padding:12px 14px;font-size:12px;margin:14px 0}.notice.blue{border-color:#2c527a;background:#142840;color:#b9dcff}.notice.green{border-color:#285b48;background:#142c25;color:#b8f0d6}
+.kv{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid #25314a}.kv:last-child{border:0}.tag{display:inline-block;border:1px solid #35435e;color:#c5d2e8;padding:4px 8px;border-radius:99px;font-size:10px;margin:3px 4px 3px 0}.tag.amber{color:#ffd08a;border-color:#76572d;background:#35291a}.tag.green{color:#a7e8c9;border-color:#2c654d;background:#163328}.tag.red{color:#ffb2b2;border-color:#704040;background:#351d25}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}.tab{border:1px solid var(--line);background:#111a2b;color:var(--muted);border-radius:9px;padding:7px 10px;font-size:12px}.tab.active{background:#29364f;color:#fff;border-color:#50617d}
+.field{display:flex;flex-direction:column;gap:6px;margin:10px 0}.field label{font-size:11px;color:var(--muted)}.field input,.field select,.field textarea{background:#0d1628;color:var(--text);border:1px solid #34415a;border-radius:9px;padding:10px;outline:none;width:100%}.field textarea{min-height:88px;resize:vertical}
+.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;min-width:570px}th,td{text-align:left;padding:11px 9px;border-bottom:1px solid #28344c;font-size:12px}th{color:#91a1bb;font-weight:600}td{color:#d9e3f2}
+.workflow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.step{padding:12px;border:1px solid var(--line);border-radius:11px;background:#111a2b}.step b{display:block;font-size:12px}.step span{font-size:10px;color:var(--muted)}
+.calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}.day{min-height:90px;padding:8px;border:1px solid var(--line);border-radius:9px;background:#10192a}.day b{font-size:11px}.day small{display:block;color:var(--muted);font-size:10px;margin-top:7px}
+.mobile-menu{display:none}
+footer{margin-top:35px;color:#6f7f9b;font-size:10px;text-align:center}
+@media(max-width:1050px){.g4{grid-template-columns:repeat(2,1fr)}.app{grid-template-columns:210px 1fr}.workflow{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.app{display:block}.sidebar{position:fixed;z-index:20;left:-270px;top:0;width:250px;transition:left .2s;box-shadow:20px 0 60px #0008}.sidebar.open{left:0}.mobile-menu{display:inline-flex}.topbar{align-items:flex-start}.top-actions .pill{display:none}main{padding:17px 13px 40px}.g3,.g2{grid-template-columns:1fr}.g4{gap:9px}.card{padding:14px}.metric{font-size:22px}.section-head{align-items:flex-start}.calendar{grid-template-columns:repeat(2,minmax(0,1fr))}.workflow{grid-template-columns:1fr 1fr}}
+@media(max-width:390px){.g4{grid-template-columns:1fr 1fr}.topbar h1{font-size:21px}.workflow{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+  <div class="brand"><div class="logo">DT</div><div><b>Desi Toon Gaon</b><small>AI YouTube Studio v1</small></div></div>
+  <div class="nav-label">Workspace</div>
+  <nav class="nav" id="nav">
+    <button class="active" data-page="overview"><span class="ico">◈</span> Overview <span class="muted">/ डैशबोर्ड</span></button>
+    <button data-page="research"><span class="ico">⌕</span> Research <span class="muted">/ रिसर्च</span></button>
+    <button data-page="content"><span class="ico">▦</span> Content Plan <span class="muted">/ कैलेंडर</span></button>
+    <button data-page="projects"><span class="ico">▣</span> Projects <span class="muted">/ प्रोडक्शन</span></button>
+    <button data-page="seo"><span class="ico">⌘</span> SEO Lab <span class="muted">/ SEO</span></button>
+    <button data-page="analytics"><span class="ico">▥</span> Analytics <span class="muted">/ एनालिटिक्स</span></button>
+    <button data-page="approvals"><span class="ico">✓</span> Approvals <span class="muted">/ अनुमति</span></button>
+  </nav>
+  <div class="nav-label">System</div>
+  <nav class="nav"><button data-page="settings"><span class="ico">⚙</span> Settings <span class="muted">/ सेटिंग्स</span></button></nav>
+  <div class="side-foot"> <span class="tag amber">PROTOTYPE</span><br><br>Backend: Not connected<br>Monitoring: Architecture only<br>Approval-first mode enabled</div>
+</aside>
+<main>
+  <header class="topbar">
+    <div><button class="btn mobile-menu" id="menuBtn">☰</button><div class="eyebrow">Creator workspace · निर्माता डैशबोर्ड</div><h1 id="pageTitle">Overview</h1><div class="tiny">Single channel · Mixed content · Approval-first</div></div>
+    <div class="top-actions"><span class="pill">◉ Single channel</span><span class="status">Prototype / Not Connected</span></div>
+  </header>
+
+  <section class="page active" id="overview">
+    <div class="notice"><b>Prototype mode:</b> YouTube OAuth/API connected नहीं है। इस स्क्रीन पर कोई live analytics या fabricated result नहीं दिखाया जा रहा। Connect करने के बाद ही channel data आएगा।</div>
+    <div class="grid g4">
+      <div class="card"><div class="metric-label">Subscribers / सब्सक्राइबर्स</div><div class="metric">—</div><div class="tiny">Not connected · No live data</div></div>
+      <div class="card"><div class="metric-label">Views / व्यूज़</div><div class="metric">—</div><div class="tiny">Not connected · No live data</div></div>
+      <div class="card"><div class="metric-label">Watch time / वॉच टाइम</div><div class="metric">—</div><div class="tiny">Not connected · No live data</div></div>
+      <div class="card"><div class="metric-label">Pending approvals / बाकी अनुमतियाँ</div><div class="metric">0</div><div class="tiny">Local prototype queue</div></div>
+    </div>
+    <div class="section-head"><div><h2>Channel workspace</h2><p>चैनल की मौजूदा कनेक्शन स्थिति और मुख्य काम</p></div><a class="btn small" href="https://youtube.com/@desitoongaonyt" target="_blank" rel="noopener">Open YouTube ↗</a></div>
+    <div class="grid g2">
+      <div class="card"><h3>Channel connection</h3><div class="kv"><span class="muted">Channel</span><b>Desi Toon Gaon</b></div><div class="kv"><span class="muted">Channel URL</span><span class="tiny">youtube.com/@desitoongaonyt</span></div><div class="kv"><span class="muted">OAuth status</span><span class="tag amber">Not connected</span></div><div class="kv"><span class="muted">Last sync</span><span class="muted">—</span></div></div>
+      <div class="card"><h3>Channel Health Audit</h3><div class="empty"><strong>Audit waiting for channel data</strong>YouTube Analytics + Data API authorization के बाद audit चलाया जा सकेगा।<br><br><button class="btn small" data-goto="settings">View integration setup</button></div></div>
+    </div>
+    <div class="section-head"><div><h2>Quick actions / त्वरित काम</h2><p>Drafts बनाएं; publish करने से पहले approval आवश्यक होगा</p></div></div>
+    <div class="grid g3">
+      <div class="card"><h3>＋ New video project</h3><p class="tiny">Idea से script, scenes, prompts, voice और SEO तक।</p><button class="btn primary small" data-goto="projects">Create project</button></div>
+      <div class="card"><h3>⌕ Research a topic</h3><p class="tiny">Trend और competitor research के लिए brief बनाएं।</p><button class="btn small" data-goto="research">Start research</button></div>
+      <div class="card"><h3>✓ Approval center</h3><p class="tiny">महत्वपूर्ण actions review और approve करें।</p><button class="btn small" data-goto="approvals">Review queue</button></div>
+    </div>
+    <div class="section-head"><div><h2>Configured content direction</h2><p>आपकी निर्धारित channel settings</p></div></div>
+    <div class="card"><span class="tag">Cooking</span><span class="tag">Family</span><span class="tag">Indian Village Life</span><span class="tag">2D Cinematic Animated Documentaries</span><div class="kv"><span>Automation level</span><b>Approval-first</b></div><div class="kv"><span>Monitoring target</span><b>Every 6 hours (architecture only)</b></div>
+    </div>
+  </section>
+
+  <section class="page" id="research">
+    <div class="notice blue">Research connectors अभी उपलब्ध नहीं हैं। नीचे brief builder काम करता है; live trends/competitor results backend integration के बाद ही दिखेंगे।</div>
+    <div class="grid g2">
+      <div class="card"><h3>Topic & trend research / विषय और ट्रेंड</h3><div class="field"><label>Topic / विषय</label><input id="researchTopic" placeholder="जैसे गाँव की सर्दियों की रेसिपी"></div><div class="field"><label>Category</label><select id="researchCategory"><option>Cooking</option><option>Family</option><option>Indian Village Life</option><option>2D Cinematic Animated Documentaries</option></select></div><div class="field"><label>Research goal</label><select id="researchGoal"><option>Shorts topic validation</option><option>Trending keywords</option><option>Audience intent</option><option>Competitor format analysis</option></select></div><button class="btn primary" id="makeResearch">Create research brief</button><p class="tiny" id="researchOut">No research brief generated yet.</p></div>
+      <div class="card"><h3>Competitor analysis / प्रतिस्पर्धी विश्लेषण</h3><div class="field"><label>Competitor channel URL</label><input id="competitorUrl" placeholder="https://youtube.com/@channel"></div><div class="field"><label>Compare</label><select><option>Content themes + formats</option><option>Titles + thumbnails</option><option>Posting cadence</option><option>Public video performance</option></select></div><button class="btn" id="competitorBtn">Prepare comparison brief</button><p class="tiny" id="competitorOut">Competitor data: Not connected.</p></div>
+    </div>
+    <div class="section-head"><div><h2>Research checklist</h2><p>Live result नहीं; यह research process template है</p></div></div>
+    <div class="card"><div class="kv"><span>Search demand & seasonality</span><span class="tag amber">Awaiting data</span></div><div class="kv"><span>Audience fit for Desi Toon Gaon</span><span class="tag amber">Awaiting data</span></div><div class="kv"><span>Competitor gap / differentiation</span><span class="tag amber">Awaiting data</span></div><div class="kv"><span>Policy & factual verification</span><span class="tag amber">Manual review</span></div></div>
+  </section>
+
+  <section class="page" id="content">
+    <div class="section-head"><div><h2>Content calendar / कंटेंट कैलेंडर</h2><p>7, 15 और 30 दिन की planning view</p></div><div class="tabs"><button class="tab active" data-range="7">7 Days</button><button class="tab" data-range="15">15 Days</button><button class="tab" data-range="30">30 Days</button></div></div>
+    <div class="notice">Calendar खाली रखा गया है ताकि कोई काल्पनिक scheduled upload न दिखे। नीचे से अपने draft slots जोड़ें।</div>
+    <div class="card"><div class="field"><label>New content slot / नया स्लॉट</label><input id="slotTitle" placeholder="वीडियो का विषय या working title"></div><div class="grid g2"><div class="field"><label>Date</label><input id="slotDate" type="date"></div><div class="field"><label>Category</label><select id="slotCategory"><option>Cooking</option><option>Family</option><option>Indian Village Life</option><option>2D Cinematic Animated Documentaries</option></select></div></div><button class="btn primary" id="addSlot">Add to calendar</button></div>
+    <div class="section-head"><div><h2>Planned slots</h2><p id="rangeLabel">Showing next 7 days</p></div></div><div class="card table-wrap"><table><thead><tr><th>Date</th><th>Topic</th><th>Category</th><th>Status</th></tr></thead><tbody id="slotRows"><tr><td colspan="4" class="muted">No planned slots yet.</td></tr></tbody></table></div>
+  </section>
+
+  <section class="page" id="projects">
+    <div class="section-head"><div><h2>Video production workflow / वीडियो निर्माण</h2><p>एक project में पूरी production pipeline track करें</p></div><button class="btn primary" id="newProject">＋ New project</button></div>
+    <div class="notice blue">यह front-end prototype local browser state में drafts रखता है। Server persistence, AI generation और media storage अभी connect नहीं हैं।</div>
+    <div class="grid g2">
+      <div class="card"><h3>Project brief</h3><div class="field"><label>Project title</label><input id="projectTitle" placeholder="जैसे गाँव की सुबह और गरमा-गरम नाश्ता"></div><div class="field"><label>Format</label><select id="projectFormat"><option>YouTube Short (30–60 sec)</option><option>Short documentary</option><option>Long-form video</option></select></div><div class="field"><label>Story / concept</label><textarea id="projectStory" placeholder="कहानी का संक्षिप्त विचार..."></textarea></div><button class="btn primary" id="saveProject">Save project draft</button></div>
+      <div class="card"><h3>Production stages</h3><div class="workflow"><div class="step"><b>01 · Research</b><span>Topic validation</span></div><div class="step"><b>02 · Script</b><span>Hook + narration</span></div><div class="step"><b>03 · Scene plan</b><span>Shot-by-shot breakdown</span></div><div class="step"><b>04 · Image prompts</b><span>Character & style lock</span></div><div class="step"><b>05 · Animation</b><span>Motion prompts</span></div><div class="step"><b>06 · Audio</b><span>Hindi VO + sound</span></div><div class="step"><b>07 · Packaging</b><span>Thumbnail + SEO</span></div><div class="step"><b>08 · Approval</b><span>Upload/publish gate</span></div></div></div>
+    </div>
+    <div class="section-head"><div><h2>Project drafts</h2><p>Saved locally in this browser session</p></div></div><div id="projectList" class="grid g2"><div class="empty">No project drafts yet.</div></div>
+    <div class="section-head"><div><h2>Production deliverables</h2><p>हर project के लिए तैयार किए जाने वाले assets</p></div></div>
+    <div class="card"><span class="tag">Complete script</span><span class="tag">Scene-by-scene image prompts</span><span class="tag">Flow AI animation prompts</span><span class="tag">Hindi voice-over plan</span><span class="tag">Sound design</span><span class="tag">Thumbnail brief</span><span class="tag">SEO package</span><span class="tag">Comment analysis + reply drafts</span></div>
+  </section>
+
+  <section class="page" id="seo">
+    <div class="notice blue">SEO Lab अभी draft workspace है। कोई metadata YouTube पर अपने-आप update नहीं होगा। Metadata change के लिए अलग approval अनिवार्य है।</div>
+    <div class="grid g2">
+      <div class="card"><h3>SEO package builder</h3><div class="field"><label>Video topic</label><input id="seoTopic" placeholder="वीडियो का विषय"></div><div class="field"><label>Primary keyword</label><input id="seoKeyword" placeholder="जैसे village food"></div><div class="field"><label>Language</label><select id="seoLang"><option>Hindi</option><option>Hindi + English</option><option>English</option></select></div><button class="btn primary" id="seoDraft">Create editable SEO checklist</button></div>
+      <div class="card"><h3>SEO output fields</h3><div class="field"><label>Title options</label><textarea id="seoTitles" placeholder="Title drafts appear here after you write them..."></textarea></div><div class="field"><label>Description</label><textarea id="seoDescription"></textarea></div><div class="field"><label>Tags / hashtags / keywords</label><textarea id="seoTags"></textarea></div><button class="btn" id="copySeo">Copy SEO draft</button><p class="tiny" id="seoStatus">No SEO draft generated.</p></div>
+    </div>
+    <div class="card" style="margin-top:14px"><h3>Metadata safety</h3><p class="tiny">Title, description, tags, category, thumbnail और अन्य metadata changes को backend एक approval request में record करेगा। Approval के बाद ही YouTube API call चलेगी।</p><span class="tag amber">Approval required</span></div>
+  </section>
+
+  <section class="page" id="analytics">
+    <div class="notice">Analytics API connected नहीं है। इस section में कोई sample chart या made-up numbers नहीं दिखाए जाते।</div>
+    <div class="grid g4"><div class="card"><div class="metric-label">Views</div><div class="metric">—</div><div class="tiny">No data</div></div><div class="card"><div class="metric-label">Watch time</div><div class="metric">—</div><div class="tiny">No data</div></div><div class="card"><div class="metric-label">CTR</div><div class="metric">—</div><div class="tiny">No data</div></div><div class="card"><div class="metric-label">Average retention</div><div class="metric">—</div><div class="tiny">No data</div></div></div>
+    <div class="section-head"><div><h2>Analytics modules</h2><p>Data source: YouTube Analytics API (OAuth required)</p></div></div>
+    <div class="grid g2"><div class="card"><h3>Video performance analysis</h3><div class="empty">No authorized video analytics available.</div></div><div class="card"><h3>Traffic sources</h3><div class="empty">No traffic-source report available.</div></div><div class="card"><h3>Retention & audience</h3><div class="empty">Retention report will appear after API integration and supported metric availability.</div></div><div class="card"><h3>Daily / weekly reports</h3><div class="empty">Report generation is not connected. Schedule and delivery require backend setup.</div></div></div>
+  </section>
+
+  <section class="page" id="approvals">
+    <div class="notice"><b>Approval-first:</b> कोई action स्वतः execute नहीं होगा। यह prototype UI approval workflow दिखाता है; वास्तविक execution के लिए authenticated backend आवश्यक है।</div>
+    <div class="section-head"><div><h2>Approval center / अनुमति केंद्र</h2><p>हर sensitive action के लिए explicit approval</p></div><span class="tag green">Approval-first enabled</span></div>
+    <div class="card"><h3>Protected actions</h3><div class="kv"><span>Upload video</span><span class="tag amber">Separate approval</span></div><div class="kv"><span>Publish / schedule</span><span class="tag amber">Separate approval</span></div><div class="kv"><span>Delete video</span><span class="tag red">Separate approval</span></div><div class="kv"><span>Visibility change</span><span class="tag amber">Separate approval</span></div><div class="kv"><span>Metadata change</span><span class="tag amber">Separate approval</span></div><div class="kv"><span>Public comment reply</span><span class="tag amber">Separate approval</span></div></div>
+    <div class="section-head"><div><h2>Pending requests</h2><p>Demo queue में कोई backend request मौजूद नहीं है</p></div></div><div class="card" id="approvalList"><div class="empty"><strong>No pending approvals</strong>Backend not connected. वास्तविक requests यहाँ दिखाई देंगी।</div></div>
+    <div class="section-head"><div><h2>Approval policy</h2></div></div><div class="card"><p class="tiny">Approval record में action type, channel ID, resource ID, before/after values, requester, expiry, approver, timestamp और idempotency key रखे जाएँ। Approval one-time, action-specific और expiring हो। Approval के बाद भी backend permissions और resource state दोबारा verify करे।</p></div>
+  </section>
+
+  <section class="page" id="settings">
+    <div class="section-head"><div><h2>Settings / सेटिंग्स</h2><p>Configured project settings और integration checklist</p></div></div>
+    <div class="grid g2">
+      <div class="card"><h3>Channel settings</h3><div class="kv"><span>Channel scope</span><b>Single Channel</b></div><div class="kv"><span>Channel</span><b>Desi Toon Gaon</b></div><div class="kv"><span>Content direction</span><b>Mixed</b></div><div class="kv"><span>Categories</span><span class="tiny">Cooking · Family · Village Life · Animated Docs</span></div><div class="kv"><span>Automation level</span><b>Approval-first</b></div><div class="kv"><span>Monitoring target</span><b>Every 6 hours</b></div></div>
+      <div class="card"><h3>Integrations</h3><div class="kv"><span>Google OAuth</span><span class="tag amber">Not connected</span></div><div class="kv"><span>YouTube Data API v3</span><span class="tag amber">Not connected</span></div><div class="kv"><span>YouTube Analytics API</span><span class="tag amber">Not connected</span></div><div class="kv"><span>Backend scheduler</span><span class="tag amber">Not deployed</span></div><div class="kv"><span>AI provider</span><span class="tag amber">Not configured</span></div></div>
+    </div>
+    <div class="section-head"><div><h2>Secure connection checklist</h2><p>OAuth secrets और tokens frontend में कभी न रखें</p></div></div>
+    <div class="card"><ol class="tiny"><li>Google Cloud project और YouTube Data API v3 + Analytics API enable करें।</li><li>OAuth consent screen configure करें; production में verified domain और least-privilege scopes रखें।</li><li>Backend पर Authorization Code flow + PKCE/state validation लागू करें।</li><li>Client secret, refresh token और access token encrypted server-side storage में रखें।</li><li>Frontend केवल backend session cookie (HttpOnly, Secure, SameSite) से API proxy को call करे।</li><li>Disconnect, token revocation, audit log और data retention controls दें।</li></ol></div>
+  </section>
+  <footer>Desi Toon Gaon AI YouTube Studio v1 · Frontend prototype · No live YouTube connection</footer>
+</main>
+</div>
+<script>
+const titles={overview:"Overview",research:"Research",content:"Content Plan",projects:"Projects",seo:"SEO Lab",analytics:"Analytics",approvals:"Approvals",settings:"Settings"};
+function go(page){document.querySelectorAll(".page").forEach(x=>x.classList.toggle("active",x.id===page));document.querySelectorAll("[data-page]").forEach(x=>x.classList.toggle("active",x.dataset.page===page));document.getElementById("pageTitle").textContent=titles[page]||"Studio";document.getElementById("sidebar").classList.remove("open");window.scrollTo(0,0)}
+document.querySelectorAll("[data-page]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
+document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.goto)));
+document.getElementById("menuBtn").addEventListener("click",()=>document.getElementById("sidebar").classList.toggle("open"));
+document.getElementById("makeResearch").addEventListener("click",()=>{let t=document.getElementById("researchTopic").value.trim();let c=document.getElementById("researchCategory").value;let g=document.getElementById("researchGoal").value;document.getElementById("researchOut").textContent=t?`Brief created locally: "${t}" · ${c} · ${g}. Live research: Not connected.`:"पहले topic लिखें।"});
+document.getElementById("competitorBtn").addEventListener("click",()=>{let u=document.getElementById("competitorUrl").value.trim();document.getElementById("competitorOut").textContent=u?`Comparison brief prepared for ${u}. Public channel data fetch: Not connected.`:"Competitor channel URL दर्ज करें।"});
+let slots=[];let range=7;
+function renderSlots(){let tbody=document.getElementById("slotRows");let today=new Date();let end=new Date(today);end.setDate(today.getDate()+range);let list=slots.filter(s=>{let d=new Date(s.date+"T00:00:00");return d>=new Date(today.toDateString())&&d<end}).sort((a,b)=>a.date.localeCompare(b.date));document.getElementById("rangeLabel").textContent=`Showing next ${range} days`;tbody.innerHTML=list.length?list.map(s=>`<tr><td>${s.date}</td><td>${escapeHtml(s.title)}</td><td>${escapeHtml(s.category)}</td><td><span class="tag">Draft plan</span></td></tr>`).join(""):'<tr><td colspan="4" class="muted">No planned slots in this range.</td></tr>'}
+document.querySelectorAll("[data-range]").forEach(b=>b.addEventListener("click",()=>{range=Number(b.dataset.range);document.querySelectorAll("[data-range]").forEach(x=>x.classList.toggle("active",x===b));renderSlots()}));
+document.getElementById("addSlot").addEventListener("click",()=>{let title=document.getElementById("slotTitle").value.trim(),date=document.getElementById("slotDate").value,category=document.getElementById("slotCategory").value;if(!title||!date){alert("Topic और date दोनों भरें।");return}slots.push({title,date,category});document.getElementById("slotTitle").value="";renderSlots()});
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+let projects=[];
+document.getElementById("saveProject").addEventListener("click",()=>{let title=document.getElementById("projectTitle").value.trim();if(!title){alert("Project title लिखें।");return}projects.push({title,format:document.getElementById("projectFormat").value,story:document.getElementById("projectStory").value});renderProjects();document.getElementById("projectTitle").value="";document.getElementById("projectStory").value=""});
+document.getElementById("newProject").addEventListener("click",()=>{document.getElementById("projectTitle").focus();window.scrollTo(0,0)});
+function renderProjects(){let el=document.getElementById("projectList");el.innerHTML=projects.length?projects.map((p,i)=>`<div class="card"><h3>${escapeHtml(p.title)}</h3><span class="tag">${escapeHtml(p.format)}</span><p class="tiny">${escapeHtml(p.story||"No concept notes yet.")}</p><div class="tiny">Status: Local draft · Project ${i+1}</div></div>`).join(""):'<div class="empty">No project drafts yet.</div>'}
+document.getElementById("seoDraft").addEventListener("click",()=>{let t=document.getElementById("seoTopic").value.trim(),k=document.getElementById("seoKeyword").value.trim();if(!t){alert("Video topic लिखें।");return}document.getElementById("seoTitles").value=`[Title option 1 — ${t}]\n[Title option 2 — curiosity + ${k||"primary keyword"}]\n[Title option 3 — Hindi emotional hook]`;document.getElementById("seoDescription").value=`${t}\n\n[वीडियो का संक्षिप्त विवरण लिखें]\n[Channel CTA और relevant links जोड़ें]`;document.getElementById("seoTags").value=`${k}\n[related keywords]\n[hashtags: #DesiToonGaon #IndianVillage #VillageLife]`;document.getElementById("seoStatus").textContent="Editable SEO checklist created. AI-generated SEO: Not connected."});
+document.getElementById("copySeo").addEventListener("click",()=>{let s="TITLES\n"+document.getElementById("seoTitles").value+"\n\nDESCRIPTION\n"+document.getElementById("seoDescription").value+"\n\nTAGS / HASHTAGS\n"+document.getElementById("seoTags").value;navigator.clipboard?.writeText(s).then(()=>document.getElementById("seoStatus").textContent="Copied.").catch(()=>document.getElementById("seoStatus").textContent="Clipboard not available in this browser.")});
+</script>
+</body></html>
